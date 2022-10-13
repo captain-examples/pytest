@@ -14,4 +14,19 @@ jobs:
           python-version: '3.10'
           cache: 'pip' # caching pip dependencies
       - run: pip install -r requirements.txt
-      - run: pytest
+      - run: pytest --junitxml tmp/pytest.xml
+      - name: Upload test results to Captain
+        uses: rwx-research/upload-captain-artifact@v1
+        if: always()
+        continue-on-error: true
+        with:
+          artifacts: |
+            [
+              {
+                "name": "pytest",
+                "path": "tmp/pytest.xml",
+                "kind": "test_results",
+                "parser": "junit_xml"
+              }
+            ]
+          captain-token: '${{ secrets.CAPTAIN_API_TOKEN }}'
