@@ -19,7 +19,7 @@ jobs:
         run: |
           captain run \
             --suite-id captian-examples-pytest \
-            --test-results tmp/pytest.xml \
-            -- pytest --junitxml tmp/pytest.xml
+            --test-results tmp/log.json \
+            -- pytest --report-log=tmp/log.json
         env:
           RWX_ACCESS_TOKEN: ${{ secrets.RWX_ACCESS_TOKEN }}
