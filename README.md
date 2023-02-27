@@ -2,13 +2,13 @@
 
 Starting from a [simple workflow that runs pytest][workflow-before-captain], we want to
 
-## 1. 🧪 Ensure pytest produces junit output
+## 1. 🧪 Ensure pytest produces its reportlog output
+
+The native pytest JUnit XML is insufficient for Captain's functionality. In place of it, we recommend installing [pytest-reportlog](https://github.com/pytest-dev/pytest-reportlog). Once installed, ensure pytest produces compatible output with:
 
 ```sh
-pytest --junit-xml tmp/pytest.xml
+pytest --report-log=tmp/log.json
 ```
-
-will produce Captain-compatible xml output in `tmp/pytest.xml`.
 
 ## 2. 🔐 Create an Access Token
 
@@ -27,8 +27,8 @@ See the [full documentation on test suite integration][test-suite-integration].
   run: |
     captain run \
       --suite-id captian-examples-pytest \
-      --test-results tmp/pytest.xml \
-      -- pytest --junitxml tmp/pytest.xml
+      --test-results tmp/log.json \
+      -- pytest --report-log=tmp/log.json
   env:
     RWX_ACCESS_TOKEN: ${{ secrets.RWX_ACCESS_TOKEN }}
 ```
