@@ -1,0 +1,5 @@
+test-suites:
+  captian-examples-pytest:
+    command: pytest --report-log=tmp/log.json
+    results:
+      path: tmp/log.json

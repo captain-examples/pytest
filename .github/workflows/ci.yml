@@ -16,10 +16,6 @@ jobs:
       - run: pip install -r requirements.txt
       - uses: rwx-research/setup-captain@v1
       - name: Run tests
-        run: |
-          captain run \
-            --suite-id captian-examples-pytest \
-            --test-results tmp/log.json \
-            -- pytest --report-log=tmp/log.json
+        run: captain run captian-examples-pytest
         env:
           RWX_ACCESS_TOKEN: ${{ secrets.RWX_ACCESS_TOKEN }}
